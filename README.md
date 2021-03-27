@@ -1,4 +1,6 @@
 # yon
+[![Go Reference](https://pkg.go.dev/badge/github.com/MeztliRA/yon.svg)](https://pkg.go.dev/github.com/MeztliRA/yon)
+
 Go module to prompt user with a yes or no question
 ## example
 ```
