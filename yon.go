@@ -14,32 +14,24 @@ const (
 )
 
 func Prompt(prompt string) string {
-	reader := bufio.NewReader(os.Stdin)
-
-	for {
-		fmt.Print(prompt + "(yes/no) ")
-		answer, err := reader.ReadString('\n')
-		if err != nil {
-			log.Fatal(err)
-		}
-		answer = strings.Trim(answer, "\n")
-
-		switch answer {
-		case "y", "Y", "yes", "Yes", "YES":
-			return Yes
-		case "n", "N", "no", "No", "NO":
-			return No
-		default:
-			continue
-		}
-	}
+	answer := promptCore(prompt+"(yes/no) ", false)
+	return answer
 }
 
 func Promptln(prompt string) string {
+	answer := promptCore(prompt+"(yes/no)", true)
+	return answer
+}
+
+func promptCore(prompt string, ln bool) string {
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
-		fmt.Println(prompt + "(yes/no)")
+		if ln {
+			fmt.Println(prompt)
+		} else {
+			fmt.Print(prompt)
+		}
 		answer, err := reader.ReadString('\n')
 		if err != nil {
 			log.Fatal(err)
