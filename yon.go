@@ -24,6 +24,9 @@ func Promptln(prompt string) string {
 }
 
 func promptCore(prompt string, ln bool) string {
+	log.SetPrefix("prompt: ")
+	log.SetFlags(0)
+
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
