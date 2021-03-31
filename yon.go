@@ -8,22 +8,24 @@ import (
 	"strings"
 )
 
+type Response string
+
 const (
-	Yes = "YES"
-	No  = "NO"
+	Yes = Response("YES")
+	No  = Response("NO")
 )
 
-func Prompt(prompt string) string {
+func Prompt(prompt string) Response {
 	answer := promptCore(prompt+"(yes/no) ", false)
 	return answer
 }
 
-func Promptln(prompt string) string {
+func Promptln(prompt string) Response {
 	answer := promptCore(prompt+"(yes/no)", true)
 	return answer
 }
 
-func promptCore(prompt string, ln bool) string {
+func promptCore(prompt string, ln bool) Response {
 	log.SetPrefix("prompt: ")
 	log.SetFlags(0)
 
