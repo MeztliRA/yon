@@ -10,12 +10,12 @@ import (
 )
 
 // type for user response
-type Response string
+type Response bool
 
 // constant for yes or no response from user
 const (
-	Yes = Response("YES")
-	No  = Response("NO")
+	Yes = Response(true)
+	No  = Response(false)
 )
 
 // prompt the user with a yes or no question using the passed argument as the prompt, return yon.Yes or yon.No
