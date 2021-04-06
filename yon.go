@@ -3,6 +3,7 @@ package yon
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -28,6 +29,30 @@ func Prompt(prompt string) Response {
 func Promptln(prompt string) Response {
 	answer := promptCore(prompt+"(yes/no)", true)
 	return answer
+}
+
+// Similar to Prompt(), but only prompt the user for a responce once, return yon.Yes or yon.No and a error, error is not nil if user didnt response with yes or no
+func PromptOnce(prompt string) (Response, error) {
+	log.SetPrefix("prompt: ")
+	log.SetFlags(0)
+
+	reader := bufio.NewReader(os.Stdin)
+
+	fmt.Print(prompt)
+	answer, err := reader.ReadString('\n')
+	if err != nil {
+		log.Fatal(err)
+	}
+	answer = strings.Trim(answer, "\n")
+
+	switch answer {
+	case "y", "Y", "yes", "Yes", "YES":
+		return Yes, nil
+	case "n", "N", "no", "No", "NO":
+		return No, nil
+	default:
+		return No, errors.New("prompt: user didnt input yes or no")
+	}
 }
 
 func promptCore(prompt string, ln bool) Response {
