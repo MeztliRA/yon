@@ -38,7 +38,7 @@ func PromptOnce(prompt string) (Response, error) {
 
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Print(prompt)
+	fmt.Print(prompt + "(yes/no) ")
 	answer, err := reader.ReadString('\n')
 	if err != nil {
 		log.Fatal(err)
