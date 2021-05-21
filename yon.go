@@ -21,21 +21,16 @@ const (
 
 // prompt the user with a yes or no question using the passed argument as the prompt, return yon.Yes or yon.No
 func Prompt(prompt string) Response {
-	answer := promptCore(prompt+"(yes/no) ", false)
-	return answer
+	return promptCore(prompt+"(yes/no) ", false)
 }
 
 // similar to Prompt(), but a new line is appended to the prompt, so the user is inputting their response on a new line, return yon.Yes or yon.No
 func Promptln(prompt string) Response {
-	answer := promptCore(prompt+"(yes/no)", true)
-	return answer
+	return promptCore(prompt+"(yes/no)", true)
 }
 
 // Similar to Prompt(), but only prompt the user for a responce once, return yon.Yes or yon.No and a error, error is not nil if user didnt response with yes or no
 func PromptOnce(prompt string) (Response, error) {
-	log.SetPrefix("prompt: ")
-	log.SetFlags(0)
-
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Print(prompt + "(yes/no) ")
@@ -56,9 +51,6 @@ func PromptOnce(prompt string) (Response, error) {
 }
 
 func promptCore(prompt string, ln bool) Response {
-	log.SetPrefix("prompt: ")
-	log.SetFlags(0)
-
 	reader := bufio.NewReader(os.Stdin)
 
 	for {
